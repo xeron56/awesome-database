@@ -106,6 +106,45 @@ In this case, the "book\_authors" table is called as join table, it is used to j
 It is also possible to add additional fields to the join table like, for example, the role of the author in the book or the date of association, which would be specific to the relationship between the books and authors table.
 
 Foreign keys can also enforce referential integrity constraints such as ON DELETE CASCADE and ON UPDATE CASCADE. These constraints specify what should happen when a primary key value is deleted or updated. For example, if ON DELETE CASCADE is specified, when a customer is deleted from the "customers" table, all the corresponding orders in the "orders" table will also be deleted.
+Sure, here's an example of how to create a many-to-many relationship between two tables "books" and "authors" using a join table "book\_authors" and foreign keys:
+
+1.  Creating the "books" table:
+
+```sql
+CREATE TABLE books (
+    book_id INT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    ISBN VARCHAR(255) NOT NULL
+);
+
+```
+
+2.  Creating the "authors" table:
+
+```sql
+CREATE TABLE authors (
+    author_id INT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+```
+
+3.  Creating the "book\_authors" join table with foreign keys:
+
+```sql
+CREATE TABLE book_authors (
+    book_id INT,
+    author_id INT,
+    PRIMARY KEY (book_id, author_id),
+    FOREIGN KEY (book_id) REFERENCES books(book_id) ON DELETE CASCADE,
+    FOREIGN KEY (author_id) REFERENCES authors(author_id) ON DELETE CASCADE
+);
+
+```
+
+In this example, we are creating a join table called "book\_authors" with two foreign keys "book\_id" and "author\_id" that reference the primary keys in the "books" and "authors" tables respectively. This creates a many-to-many relationship between books and authors: one book can have multiple authors, and one author can write multiple books.
+
+The ON DELETE CASCADE is a referential action that is used to specify what should happen when a primary key value is deleted. For example, if ON DELETE CASCADE is specified, when a book is deleted from the "books" table, all the corresponding authors in the "book\_authors" table will also be deleted.
 
 Foreign keys are extremely powerful tools that allow you to create relationships between tables and ensure the consistency and accuracy of your data.
 
