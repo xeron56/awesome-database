@@ -109,4 +109,124 @@ Foreign keys can also enforce referential integrity constraints such as ON DELET
 
 Foreign keys are extremely powerful tools that allow you to create relationships between tables and ensure the consistency and accuracy of your data.
 
+# Uniqe keys
+
+A unique key is a column or set of columns in a table that enforces the uniqueness of the values in the table. It is similar to a primary key, but it allows for null values. A table can have multiple unique keys, but each unique key must have a unique set of values across the table.
+
+For example, consider a table called "employees". An employee can have a unique employee ID, but they can also have a unique email address. In this case, you can have two unique keys in the table: one for the "employee\_id" column and one for the "email" column.
+
+Here's an example of a table called "employees" with two unique keys:
+
+| employee\_id | name | email | phone |
+| --- | --- | --- | --- |
+| 1 | John | [john@example.com](mailto:john@example.com) | 9876 |
+| 2 | Sarah | [sarah@example.com](mailto:sarah@example.com) | 1234 |
+| 3 | Michael | [michael@example.com](mailto:michael@example.com) | 4321 |
+
+In this example, "employee\_id" and "email" both are unique keys. Both of them have unique values across the table, it ensures that there are no duplicate employee ID or email addresses in the table.
+
+You can also create unique keys on multiple columns. For example, you can create a unique key on the combination of two columns such as "name" and "email" to make sure that no two employees have the same name and email address.
+
+One of the advantages of using unique keys is that it allows for more flexibility in the data model. You can create multiple unique keys for different columns or combinations of columns, which means that you can have multiple ways of identifying a row in a table. Another advantage is that unique keys can improve the performance of SELECT statements.
+
+You can create a unique key in MySQL using the "UNIQUE" keyword in the CREATE TABLE statement, or you can add it later using the ALTER TABLE statement. Also, you can use the "SHOW INDEX" command to check which unique keys exist on a table.
+
+Certainly, here are some examples of how to create and use unique keys in MySQL:
+
+1.  Creating a unique key in a new table:
+
+```sql
+CREATE TABLE employees (
+    employee_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(255) NOT NULL,
+    UNIQUE (email),
+    PRIMARY KEY (employee_id)
+);
+
+```
+
+In this example, we are creating a new table called "employees" with three columns: "employee\_id", "name" and "email". The "UNIQUE" keyword is used to create a unique key on the "email" column.
+
+2.  Creating a unique key on multiple columns:
+
+```sql
+
+ALTER TABLE employees ADD UNIQUE (name, email);
+
+```
+
+In this example, we are adding a unique key on the combination of the "name" and "email" columns in the "employees" table.
+
+3.  Creating a unique key after table is created:
+
+```sql
+ALTER TABLE employees ADD UNIQUE (phone);
+
+```
+
+This code will add unique key on phone column after table is created.
+
+4.  Dropping a unique key:
+
+```sql
+ALTER TABLE employees DROP INDEX email_unique;
+
+```
+
+In this example, we are dropping the unique key named "email\_unique" from the "employees" table.
+
+5.  Checking for existing unique keys:
+
+```sql
+SHOW INDEX FROM employees;
+
+```
+
+This command will show all the indexes and keys on the "employees" table, including any unique keys.
+
+# index 
+An index is a database object that is used to speed up the retrieval of data from a table. It can be created on one or more columns in a table and it improves the performance of SELECT statements. An index is similar to an index in a book, it provides a quick way to look up a specific value or range of values in a table.
+
+For example, consider a table called "employees" with millions of rows. Without an index, if you want to find all employees with the last name "Smith", the database would have to scan through every row of the table, which could take a long time. However, if there is an index on the "last\_name" column, the database can quickly look up all the rows with the value "Smith" in the index, and retrieve the corresponding data from the table.
+
+Here's an example of how to create an index on a table called "employees":
+
+```sql
+CREATE INDEX last_name_index ON employees (last_name);
+
+```
+
+In this example, we are creating an index called "last\_name\_index" on the "last\_name" column of the "employees" table. Now, when you run a query that looks up the last name "Smith", the database can use this index to quickly find all the matching rows.
+
+You can also create an index on multiple columns:
+
+```sql
+CREATE INDEX name_index ON employees (last_name, first_name);
+
+```
+
+Also, you can create unique index on multiple columns:
+
+```sql
+CREATE UNIQUE INDEX email_index ON employees (email);
+
+```
+
+You can also drop an index if you no longer need it:
+
+```sql
+DROP INDEX last_name_index ON employees;
+
+```
+
+You can also check existing indexes on a table:
+
+```sql
+SHOW INDEX FROM employees;
+
+```
+
+This command will show all the indexes and keys on the "employees" table.
 
