@@ -294,3 +294,66 @@ Sure, here's a table that summarizes some of the most commonly used SQL syntax f
 
 Please note that, there are many other SQL commands and clauses available in MySQL. This table just provides some examples of the most commonly used SQL syntax. Additionally, it is possible to use other SQL commands, clauses and functions to perform complex data manipulations.
 
+# Examples
+
+Sure, here's an example of a MySQL database with multiple tables that demonstrates the use of various keys:
+
+```sql
+Copy code-- Create the database
+CREATE DATABASE university;
+USE university;
+
+-- Create the students table
+CREATE TABLE students (
+    student_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(255) NOT NULL
+);
+
+-- Create the courses table
+CREATE TABLE courses (
+    course_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_name VARCHAR(255) NOT NULL,
+    credits INT NOT NULL
+);
+
+-- Create the sections table
+CREATE TABLE sections (
+    section_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_id INT NOT NULL,
+    instructor VARCHAR(255) NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+);
+
+-- Create the enrollment table
+CREATE TABLE enrollment (
+    student_id INT NOT NULL,
+    section_id INT NOT NULL,
+    grade CHAR(2) NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (section_id) REFERENCES sections(section_id),
+    PRIMARY KEY (student_id, section_id)
+);
+
+-- Create the grade_points table
+CREATE TABLE grade_points (
+    grade CHAR(2) PRIMARY KEY,
+    points DECIMAL(3,1) NOT NULL
+);
+
+-- Create the index
+CREATE INDEX last_name_index ON students (last_name);
+
+```
+
+In this example, we have created 5 tables: students, courses, sections, enrollment, and grade\_points.
+
+-   The students table has a primary key student\_id, and a unique key email.
+-   The courses table has a primary key course\_id.
+-   The sections table has a primary key section\_id, and a foreign key course\_id referencing the primary key course\_id in the courses table.
+-   The enrollment table has a primary key (student\_id, section\_id), foreign key student\_id referencing the primary key student\_id in the students table, and foreign key section\_id referencing the primary key section\_id in the sections table.
+-   The grade\_points table has a primary key grade.
+-   Additionally, we also created an index on the last\_name column of the students table for faster search and retrieval.
+
