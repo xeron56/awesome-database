@@ -269,3 +269,28 @@ SHOW INDEX FROM employees;
 
 This command will show all the indexes and keys on the "employees" table.
 
+Sure, here's a table that summarizes some of the most commonly used SQL syntax for working with MySQL databases:
+
+| Syntax | Description | Example |
+| --- | --- | --- |
+| SELECT | Retrieves data from one or more tables | SELECT \* FROM employees |
+| INSERT INTO | Inserts data into a table | INSERT INTO employees (name, email) VALUES ('John Smith', '[john@example.com](mailto:john@example.com)') |
+| UPDATE | Modifies data in a table | UPDATE employees SET name = 'Jane Smith' WHERE employee\_id = 1 |
+| DELETE FROM | Deletes data from a table | DELETE FROM employees WHERE employee\_id = 1 |
+| CREATE DATABASE | Creates a new database | CREATE DATABASE mydb |
+| DROP DATABASE | Deletes a database | DROP DATABASE mydb |
+| CREATE TABLE | Creates a new table | CREATE TABLE employees (employee\_id INT PRIMARY KEY, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL) |
+| ALTER TABLE | Modifies an existing table | ALTER TABLE employees ADD phone VARCHAR(255) |
+| DROP TABLE | Deletes a table | DROP TABLE employees |
+| CREATE INDEX | Creates an index on one or more columns | CREATE INDEX last\_name\_index ON employees (last\_name) |
+| DROP INDEX | Deletes an index | DROP INDEX last\_name\_index |
+| SELECT DISTINCT | Retrieves unique values from a column | SELECT DISTINCT last\_name FROM employees |
+| WHERE | Filters the results of a query based on a condition | SELECT \* FROM employees WHERE last\_name = 'Smith' |
+| AND / OR | Combines multiple conditions in a query | SELECT \* FROM employees WHERE last\_name = 'Smith' OR first\_name = 'Jane' |
+| ORDER BY | Sorts the results of a query | SELECT \* FROM employees ORDER BY last\_name |
+| GROUP BY | Groups the results of a query based on a column | SELECT last\_name, COUNT(\*) FROM employees GROUP BY last\_name |
+| LIMIT | Limits the number of rows returned by a query | SELECT \* FROM employees LIMIT 10 |
+| JOIN | Retrieves data from multiple tables based on a relationship | SELECT \* FROM employees JOIN orders ON employees.employee\_id = orders.employee\_id |
+
+Please note that, there are many other SQL commands and clauses available in MySQL. This table just provides some examples of the most commonly used SQL syntax. Additionally, it is possible to use other SQL commands, clauses and functions to perform complex data manipulations.
+
